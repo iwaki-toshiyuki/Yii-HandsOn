@@ -1,0 +1,46 @@
+version: '3.8'  # Docker Composeのバージョン
+
+services:
+
+  # ===============================
+  # Yii 1.1.15 用コンテナ
+  # ===============================
+  yii115:
+    build: .                     # ルートのDockerfileを使用してビルド
+    container_name: yii115_app   # コンテナ名
+    ports:
+      - "8080:80"                # ホスト8080 → コンテナ80(Apache)
+    volumes:
+      - ./yii115/src:/var/www/html  # ローカルコードをコンテナにマウント
+    depends_on:
+      - db                       # DBコンテナが先に起動するよう指定
+
+
+  # ===============================
+  # Yii 1.1.32 用コンテナ
+  # ===============================
+  yii132:
+    build: .
+    container_name: yii132_app
+    ports:
+      - "8081:80"                # ホスト8081 → コンテナ80
+    volumes:
+      - ./yii132/src:/var/www/html
+    depends_on:
+      - db
+
+
+  # ===============================
+  # MySQL データベース
+  # ===============================
+  db:
+    image: mysql:8.0              
+    container_name: yii_compare_db
+    restart: always               # コンテナが落ちたら自動再起動
+    environment:
+      MYSQL_ROOT_PASSWORD: root   # rootパスワード
+      MYSQL_DATABASE: yii         # 起動時に作成されるDB名
+      MYSQL_USER: yii             # 一般ユーザー
+      MYSQL_PASSWORD: yii         # 一般ユーザーパスワード
+    ports:
+      - "3306:3306"               # ローカルからMySQL接続可能
