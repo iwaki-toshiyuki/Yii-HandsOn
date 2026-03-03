@@ -20,14 +20,12 @@ return array(
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
+		// Giiはコード生成ツール。開発中のみ有効にすることが推奨される
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
+			'password'=>'1234',
+       		'ipFilters'=>array('*'), // ← 全許可(学習中のため)
 		),
-		*/
 	),
 
 	// application components
@@ -47,19 +45,15 @@ return array(
 			),
 		),
 		*/
+
+		// DB接続設定はdatabase.phpに記述することもできる
 		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
-		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+			'connectionString' => 'mysql:host=db57;dbname=yii115',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+    		'username' => 'yii',
+    		'password' => 'yii',
 			'charset' => 'utf8',
 		),
-		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

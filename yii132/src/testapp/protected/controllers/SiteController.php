@@ -106,4 +106,11 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+	// Yiiのバージョンを表示するアクション
+	public function actionVersion()
+{
+    echo Yii::getVersion();
+    Yii::app()->end(); // ここ重要（余計なHTML出さない）
+}
 }

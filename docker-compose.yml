@@ -1,46 +1,80 @@
-version: '3.8'  # Docker Composeのバージョン
+# ==========================================
+# Docker Compose v3.8
+# Yii 1.1.15 と 1.1.32 を比較するための構成
+# ==========================================
+version: '3.8'
 
 services:
 
-  # ===============================
-  # Yii 1.1.15 用コンテナ
-  # ===============================
+  # ==========================================
+  # Yii 1.1.15 (レガシー環境)
+  # ・PHP 7.4
+  # ・MySQL 5.7
+  # ==========================================
   yii115:
-    build: .                     # ルートのDockerfileを使用してビルド
-    container_name: yii115_app   # コンテナ名
+    build: .                        # ルートの Dockerfile を使用（PHP7.4 + Apache）
+    container_name: yii115_app      # コンテナ名（分かりやすく）
     ports:
-      - "8080:80"                # ホスト8080 → コンテナ80(Apache)
+      - "8080:80"                   # http://localhost:8080 でアクセス可能
     volumes:
-      - ./yii115/src:/var/www/html  # ローカルコードをコンテナにマウント
+      - ./yii115/src:/var/www/html  # ローカルコードをマウント
     depends_on:
-      - db                       # DBコンテナが先に起動するよう指定
+      - db57                        # MySQL5.7 が先に起動
 
-
-  # ===============================
-  # Yii 1.1.32 用コンテナ
-  # ===============================
+  # ==========================================
+  # Yii 1.1.32 (最終安定版)
+  # ・PHP 7.4
+  # ・MySQL 8.0
+  # ==========================================
   yii132:
     build: .
     container_name: yii132_app
     ports:
-      - "8081:80"                # ホスト8081 → コンテナ80
+      - "8081:80"                   # http://localhost:8081
     volumes:
       - ./yii132/src:/var/www/html
     depends_on:
-      - db
+      - db80                        # MySQL8 が先に起動
 
-
-  # ===============================
-  # MySQL データベース
-  # ===============================
-  db:
-    image: mysql:8.0              
-    container_name: yii_compare_db
-    restart: always               # コンテナが落ちたら自動再起動
+  # ==========================================
+  # MySQL 8.0（Yii 1.1.32 用）
+  # ==========================================
+  db80:
+    image: mysql:8.0                # MySQL 8.0
+    container_name: yii132_db
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root   # rootパスワード
-      MYSQL_DATABASE: yii         # 起動時に作成されるDB名
-      MYSQL_USER: yii             # 一般ユーザー
-      MYSQL_PASSWORD: yii         # 一般ユーザーパスワード
+      MYSQL_ROOT_PASSWORD: root     # rootパスワード
+      MYSQL_DATABASE: yii132        # 起動時に作成されるDB
+      MYSQL_USER: yii               # 一般ユーザー
+      MYSQL_PASSWORD: yii           # 一般ユーザーパスワード
     ports:
-      - "3306:3306"               # ローカルからMySQL接続可能
+      - "3306:3306"                 # ホストから直接接続可能
+    volumes:
+      - db_data:/var/lib/mysql      # データ永続化（重要）
+
+  # ==========================================
+  # MySQL 5.7（Yii 1.1.15 用）
+  # ==========================================
+  db57:
+    image: mysql:5.7                # MySQL 5.7（レガシー互換）
+    platform: linux/amd64   # MySQL 5.7 は amd64 で動作させる（arm64は非公式イメージが必要）
+    container_name: yii115_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: yii115
+      MYSQL_USER: yii
+      MYSQL_PASSWORD: yii
+    ports:
+      - "3307:3306"                 # 5.7 は 3307 ポートで接続
+    volumes:
+      - db57_data:/var/lib/mysql    # データ永続化
+
+# ==========================================
+# 名前付きボリューム定義
+# コンテナを down しても DBデータは消えない
+# ==========================================
+volumes:
+  db_data:
+  db57_data:

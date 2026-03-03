@@ -366,13 +366,22 @@ class ModelCode extends CCodeModel
 	 * @return boolean true if table matches description of helpter table.
 	 */
 	protected function isRelationTable($table)
-	{
-		$pk=$table->primaryKey;
-		return (count($pk) === 2 // we want 2 columns
-			&& isset($table->foreignKeys[$pk[0]]) // pk column 1 is also a foreign key
-			&& isset($table->foreignKeys[$pk[1]]) // pk column 2 is also a foriegn key
-			&& $table->foreignKeys[$pk[0]][0] !== $table->foreignKeys[$pk[1]][0]); // and the foreign keys point different tables
-	}
+{
+    $pk = $table->primaryKey;
+
+    // 単一主キーの場合は string になるため、
+    // 配列でなければリレーションテーブルではない
+    if (!is_array($pk)) {
+        return false;
+    }
+
+    return (
+        count($pk) === 2 // 2カラムの複合主キー
+        && isset($table->foreignKeys[$pk[0]])
+        && isset($table->foreignKeys[$pk[1]])
+        && $table->foreignKeys[$pk[0]][0] !== $table->foreignKeys[$pk[1]][0]
+    );
+}
 
 	protected function generateClassName($tableName)
 	{
