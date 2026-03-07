@@ -6,6 +6,18 @@
 docker compose up -d --build
 ```
 
+## 確認URL
+1.1.15
+```
+http://localhost:8080/testapp/index.php?r=gii/default/login
+```
+
+1.1.32
+```
+http://localhost:8081/testapp/index.php?r=gii/default/login
+```
+
+
 ## データベースコマンド
 
 ### データベースに入る
