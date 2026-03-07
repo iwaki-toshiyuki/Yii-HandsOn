@@ -190,3 +190,157 @@ Stack trace:
 #9 /var/www/html/testapp/index.php(13): CWebApplication->run()
 REQUEST_URI=/testapp/index.php?r=gii/model/index
 in /var/www/html/testapp/index.php (13)
+2026/03/07 09:21:39 [error] [exception.CException] CException: Property "UserIdentity._id" is not defined. in /var/www/html/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/html/testapp/protected/components/UserIdentity.php(41): CComponent->__set('_id', '1')
+#1 /var/www/html/testapp/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /var/www/html/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /var/www/html/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /var/www/html/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), Array)
+#5 /var/www/html/testapp/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /var/www/html/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /var/www/html/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/html/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/html/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/html/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /var/www/html/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /var/www/html/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/html/testapp/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/testapp/index.php?r=site/login
+HTTP_REFERER=http://localhost:8080/testapp/index.php?r=site/login
+---
+2026/03/07 09:23:13 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2).
+in /var/www/html/testapp/protected/controllers/UserController.php (73)
+in /var/www/html/testapp/index.php (13)
+2026/03/07 09:23:13 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2) in /var/www/html/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/html/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/html/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/html/testapp/protected/controllers/UserController.php(73): CActiveRecord->save()
+#3 /var/www/html/framework/web/actions/CInlineAction.php(49): UserController->actionCreate()
+#4 /var/www/html/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/html/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/html/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/html/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/html/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/html/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/html/framework/web/CWebApplication.php(141): CWebApplication->runController('user/create')
+#14 /var/www/html/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/html/testapp/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/testapp/index.php?r=user/create
+HTTP_REFERER=http://localhost:8080/testapp/index.php?r=user/create
+---
+2026/03/07 09:23:23 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2).
+in /var/www/html/testapp/protected/controllers/UserController.php (73)
+in /var/www/html/testapp/index.php (13)
+2026/03/07 09:23:23 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2) in /var/www/html/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/html/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/html/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/html/testapp/protected/controllers/UserController.php(73): CActiveRecord->save()
+#3 /var/www/html/framework/web/actions/CInlineAction.php(49): UserController->actionCreate()
+#4 /var/www/html/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/html/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/html/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/html/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/html/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/html/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/html/framework/web/CWebApplication.php(141): CWebApplication->runController('user/create')
+#14 /var/www/html/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/html/testapp/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/testapp/index.php?r=user/create
+HTTP_REFERER=http://localhost:8080/testapp/index.php?r=user/create
+---
+2026/03/07 09:24:19 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2).
+in /var/www/html/testapp/protected/controllers/UserController.php (73)
+in /var/www/html/testapp/index.php (13)
+2026/03/07 09:24:19 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2) in /var/www/html/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/html/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/html/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/html/testapp/protected/controllers/UserController.php(73): CActiveRecord->save()
+#3 /var/www/html/framework/web/actions/CInlineAction.php(49): UserController->actionCreate()
+#4 /var/www/html/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/html/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/html/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/html/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/html/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/html/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/html/framework/web/CWebApplication.php(141): CWebApplication->runController('user/create')
+#14 /var/www/html/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/html/testapp/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/testapp/index.php?r=user/create
+HTTP_REFERER=http://localhost:8080/testapp/index.php?r=user/create
+---
+2026/03/07 09:24:25 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2).
+in /var/www/html/testapp/protected/controllers/UserController.php (73)
+in /var/www/html/testapp/index.php (13)
+2026/03/07 09:24:25 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value. The SQL statement executed was: INSERT INTO `user` (`username`, `email`, `created_at`) VALUES (:yp0, :yp1, :yp2) in /var/www/html/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/html/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/html/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/html/testapp/protected/controllers/UserController.php(73): CActiveRecord->save()
+#3 /var/www/html/framework/web/actions/CInlineAction.php(49): UserController->actionCreate()
+#4 /var/www/html/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/html/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/html/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/html/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/html/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/html/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/html/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/html/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/web/CWebApplication.php(282): CController->run('create')
+#13 /var/www/html/framework/web/CWebApplication.php(141): CWebApplication->runController('user/create')
+#14 /var/www/html/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/html/testapp/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/testapp/index.php?r=user/create
+HTTP_REFERER=http://localhost:8080/testapp/index.php?r=user/create
+---
+2026/03/07 09:25:13 [error] [exception.CHttpException.403] CHttpException: You are not authorized to perform this action. in /var/www/html/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/html/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/html/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/html/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/html/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/html/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/framework/web/CWebApplication.php(282): CController->run('delete')
+#8 /var/www/html/framework/web/CWebApplication.php(141): CWebApplication->runController('user/delete')
+#9 /var/www/html/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/testapp/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/testapp/index.php?r=user/delete&id=1
+HTTP_REFERER=http://localhost:8080/testapp/index.php?r=user/view&id=1
+---
+2026/03/07 09:27:15 [error] [exception.CHttpException.403] CHttpException: You are not authorized to perform this action. in /var/www/html/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/html/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/html/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/html/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/html/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/html/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/html/framework/web/CWebApplication.php(141): CWebApplication->runController('user/admin')
+#9 /var/www/html/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/testapp/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/testapp/index.php?r=user/admin
+HTTP_REFERER=http://localhost:8080/testapp/index.php?r=site/login
+---
