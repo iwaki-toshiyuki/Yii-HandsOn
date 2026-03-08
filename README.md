@@ -7,14 +7,14 @@ docker compose up -d --build
 ```
 
 ## 確認URL
-1.1.15
+1.1.15(Gii 使用)
 ```
 http://localhost:8080/testapp/index.php?r=gii/default/login
 ```
 
-1.1.32
+1.1.32(Gii 不使用)
 ```
-http://localhost:8081/testapp/index.php?r=gii/default/login
+http://localhost:8081/testapp/index.php?r=user/index
 ```
 
 
