@@ -5,6 +5,19 @@
 ユーザー新規作成
 </a>
 
+<!-- 検索フォーム -->
+<form method="get" action="index.php">
+
+<!-- rパラメータはコントローラー/アクションを指定するためのもの -->
+<input type="hidden" name="r" value="user/index">
+
+ユーザー名
+<input type="text" name="username">
+
+<button type="submit">検索</button>
+
+</form>
+
 <table border="1">
 
 <tr>

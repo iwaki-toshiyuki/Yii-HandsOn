@@ -8,16 +8,27 @@ class UserController extends Controller
 
     // 一覧ページ
     // URL: index.php?r=user/index
-    public function actionIndex()
-    {
-        // userテーブルの全レコードを取得
-        $users = User::model()->findAll();
+   public function actionIndex()
+{
 
-        // indexビューにデータを渡す
-        $this->render('index', array(
-            'users' => $users
-        ));
+    // CDbCriteriaクラスを用いて検索条件を作成
+    $criteria = new CDbCriteria();
+
+    // GETパラメータのusernameがあるか確認
+    if(isset($_GET['username']))
+    {
+        // usernameで部分一致検索
+        $criteria->compare('username', $_GET['username'], true);
     }
+
+    // 検索条件を使ってユーザー取得
+    $users = User::model()->findAll($criteria);
+
+    // indexビューを表示
+    $this->render('index', array(
+        'users'=>$users
+    ));
+}
 
 
     // 新規作成ページ
@@ -90,5 +101,6 @@ class UserController extends Controller
         $this->redirect(array('index'));
 
     }
+
 
 }
