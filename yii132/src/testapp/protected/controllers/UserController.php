@@ -43,6 +43,9 @@ class UserController extends Controller
             // フォームデータをモデルに代入
             $model->attributes = $_POST['User'];
 
+            // パスワードをbcryptでハッシュ化
+            $model->password = password_hash($model->password, PASSWORD_BCRYPT);
+
             // DB保存（バリデーションも実行される）
             if($model->save())
             {

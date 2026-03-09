@@ -72,29 +72,24 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
-	/**
-	 * Displays the login page
-	 */
+	// ログイン画面
 	public function actionLogin()
 	{
+		// LoginFormモデル生成
 		$model=new LoginForm;
 
-		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-
-		// collect user input data
+		// POST送信された場合
 		if(isset($_POST['LoginForm']))
 		{
+			// フォーム値をモデルへ代入
 			$model->attributes=$_POST['LoginForm'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+
+			// ログイン成功
+			if($model->login())
+				$this->redirect(Yii::app()->homeUrl); // トップページへ
 		}
-		// display the login form
+
+		// login view表示
 		$this->render('login',array('model'=>$model));
 	}
 
@@ -113,4 +108,48 @@ class SiteController extends Controller
     echo Yii::getVersion();
     Yii::app()->end(); // ここ重要（余計なHTML出さない）
 }
+
+	// フィルター設定
+	public function filters()
+	{
+		return array(
+			'accessControl', // accessRulesを有効化
+		);
+	}
+
+	// アクセス制御ルール
+	public function accessRules()
+	{
+		return array(
+
+			// 誰でもログイン画面にアクセス可能
+			array('allow',
+					'actions'=>array('login'),
+					'users'=>array('*'),
+			),
+
+			// ログインユーザーのみログアウト可能
+            array('allow',
+                'actions'=>array('logout'),
+                'users'=>array('@'),
+            ),
+
+			// 誰でも閲覧可能
+			array('allow',
+				'actions'=>array('index','view'),
+				'users'=>array('*'), // * = 全ユーザー
+			),
+
+			// ログインユーザーのみ
+			array('allow',
+				'actions'=>array('create','update'),
+				'users'=>array('@'), // @ = ログインユーザー
+			),
+
+			// その他は拒否
+			array('deny',
+				'users'=>array('*'),
+			),
+		);
+	}
 }
