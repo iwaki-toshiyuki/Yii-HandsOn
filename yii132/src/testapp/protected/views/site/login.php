@@ -9,9 +9,15 @@ $form=$this->beginWidget('CActiveForm');
 <?php echo $form->label($model,'username'); ?>
 <?php echo $form->textField($model,'username'); ?>
 
+<!-- usernameエラー -->
+<?php echo $form->error($model,'username'); ?>
+
 <!-- パスワード -->
 <?php echo $form->label($model,'password'); ?>
 <?php echo $form->passwordField($model,'password'); ?>
+
+<!-- passwordエラー -->
+<?php echo $form->error($model,'password'); ?>
 
 <button type="submit">Login</button>
 

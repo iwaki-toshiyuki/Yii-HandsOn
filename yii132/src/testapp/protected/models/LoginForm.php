@@ -11,6 +11,8 @@ class LoginForm extends CFormModel
     {
         return array(
             array('username,password','required'), // 必須入力
+
+        	array('password', 'authenticate'),// 認証チェック
         );
     }
 
@@ -31,4 +33,15 @@ class LoginForm extends CFormModel
 
         return false;
     }
+
+	// 認証チェック
+	public function authenticate($attribute,$params)
+{
+    $identity = new UserIdentity($this->username,$this->password);
+
+    if(!$identity->authenticate())
+    {
+        $this->addError('password','ユーザー名またはパスワードが違います');
+    }
+}
 }

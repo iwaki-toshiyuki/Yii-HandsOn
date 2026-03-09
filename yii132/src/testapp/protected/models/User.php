@@ -20,16 +20,42 @@ class User extends CActiveRecord
         return array(
 
             // username, email, password 必須
-            array('username, email, password', 'required'),
+            // messageオプションでエラーメッセージを指定
+            array('username, email, password', 'required',
+            'message'=>'{attribute}は必須です'),
 
-            // 文字数制限
-            array('username', 'length', 'max'=>50),
+            // username文字数
+        array(
+            'username',
+            'length',
+            'max'=>50,
+            'tooLong'=>'{attribute}は50文字以内で入力してください'
+        ),
 
-            // password長さ
-            array('password', 'length', 'max'=>255),
+        // password文字数
+        array(
+            'password',
+            'length',
+            'max'=>255,
+            // tooLong: 文字数オーバーのエラーメッセージ
+            'tooLong'=>'{attribute}は255文字以内で入力してください'
+        ),
 
-            // email形式
-            array('email', 'email'),
+        // email形式
+        array(
+            'email',
+            'email',
+            'message'=>'{attribute}の形式が正しくありません'
+        ),
+        );
+    }
+
+        public function attributeLabels()
+    {
+        return array(
+            'username'=>'名前',
+            'email'=>'メール',
+            'password'=>'パスワード',
         );
     }
 

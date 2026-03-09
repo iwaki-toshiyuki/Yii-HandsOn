@@ -82,11 +82,13 @@ class SiteController extends Controller
 		if(isset($_POST['LoginForm']))
 		{
 			// フォーム値をモデルへ代入
-			$model->attributes=$_POST['LoginForm'];
+			$model->attributes = $_POST['LoginForm'];
 
-			// ログイン成功
-			if($model->login())
-				$this->redirect(Yii::app()->homeUrl); // トップページへ
+			// validation → login
+			if($model->validate() && $model->login())
+			{
+				$this->redirect(Yii::app()->user->returnUrl);
+			}
 		}
 
 		// login view表示
