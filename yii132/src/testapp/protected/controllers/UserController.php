@@ -21,12 +21,25 @@ class UserController extends Controller
         $criteria->compare('username', $_GET['username'], true);
     }
 
+    // 全件数取得
+    $count = User::model()->count($criteria);
+
+    // ページネーション作成
+    $pages = new CPagination($count);
+
+    // 1ページ表示件数
+    $pages->pageSize = 3;
+
+    // limit追加
+    $pages->applyLimit($criteria);
+
     // 検索条件を使ってユーザー取得
     $users = User::model()->findAll($criteria);
 
     // indexビューを表示
     $this->render('index', array(
-        'users'=>$users
+        'users'=>$users,
+        'pages'=>$pages
     ));
 }
 

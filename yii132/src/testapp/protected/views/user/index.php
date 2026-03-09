@@ -74,3 +74,10 @@ onclick="return confirm('削除しますか？');">
 <?php endforeach; ?>
 
 </table>
+
+<!-- ページネーション表示 -->
+<?php
+$this->widget('CLinkPager', array(
+    'pages' => $pages,
+));
+?>
