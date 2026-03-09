@@ -16,6 +16,11 @@ User[name] → $_POST['User']['username'] として取得できる
 <!-- email入力 -->
 <input type="text" name="User[email]">
 
+パスワード
+
+<!-- password入力 -->
+<input type="password" name="User[password]">
+
 <!-- 送信ボタン -->
 <button type="submit">保存</button>
 

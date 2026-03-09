@@ -74,6 +74,11 @@ class UserController extends Controller
             // フォーム値をモデルに代入
             $model->attributes = $_POST['User'];
 
+            // passwordが入力された場合のみ更新
+            if(!empty($model->password)){
+                $model->password = password_hash($model->password, PASSWORD_BCRYPT);
+            }
+
             // DB更新
             if($model->save())
             {

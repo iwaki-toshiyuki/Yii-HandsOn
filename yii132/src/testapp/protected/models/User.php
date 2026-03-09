@@ -19,10 +19,16 @@ class User extends CActiveRecord
     {
         return array(
 
-            // name と email は必須入力
-            array('username, email', 'required'),
+            // username, email, password 必須
+            array('username, email, password', 'required'),
 
-            // email はメール形式である必要がある
+            // 文字数制限
+            array('username', 'length', 'max'=>50),
+
+            // password長さ
+            array('password', 'length', 'max'=>255),
+
+            // email形式
             array('email', 'email'),
         );
     }
