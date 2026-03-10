@@ -66,4 +66,19 @@ class User extends CActiveRecord
         return parent::model($className);
     }
 
+    // リレーション定義
+    public function relations()
+{
+    return array(
+
+        // User 1 → Post 多
+        'posts'=>array(
+            self::HAS_MANY, // 1対多
+            'Post',         // モデル名
+            'user_id'       // 外部キー
+        ),
+
+    );
+}
+
 }

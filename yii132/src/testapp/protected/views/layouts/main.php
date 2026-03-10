@@ -40,6 +40,12 @@
 				),
 
 				array(
+					'label'=>'Post',
+					'url'=>array('/post/create'),
+					'visible'=>!Yii::app()->user->isGuest
+				),
+
+				array(
 					'label'=>'Logout',
 					'url'=>array('/site/logout'),
 					'visible'=>!Yii::app()->user->isGuest

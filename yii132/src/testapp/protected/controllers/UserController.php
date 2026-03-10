@@ -128,5 +128,18 @@ class UserController extends Controller
 
     }
 
+    // リレーションテスト
+    public function actionTestRelation()
+        {
+            // id=2 のユーザー取得
+            $user = User::model()->findByPk(2);
+
+            // ユーザーの投稿一覧
+            foreach($user->posts as $post)
+            {
+                echo $post->title . "<br>";
+            }
+        }
+
 
 }
