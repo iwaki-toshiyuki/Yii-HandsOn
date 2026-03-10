@@ -2,6 +2,21 @@
 
 <a href="index.php?r=post/create">投稿作成</a>
 
+<!-- 検索フォーム -->
+<form method="get">
+
+<!-- rパラメータはコントローラー/アクションを指定するためのもの -->
+<input type="hidden" name="r" value="post/index">
+
+タイトル
+<input type="text" name="title">
+
+<button type="submit">検索</button>
+
+</form>
+
+<br>
+
 <?php foreach($posts as $post): ?>
 
 <p>
@@ -22,3 +37,10 @@
 </p>
 
 <?php endforeach; ?>
+
+<!-- ページネーション表示 -->
+<?php
+$this->widget('CLinkPager', array(
+    'pages' => $pages,
+));
+?>
