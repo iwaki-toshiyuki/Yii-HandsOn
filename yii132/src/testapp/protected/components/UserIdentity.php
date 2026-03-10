@@ -26,7 +26,9 @@ class UserIdentity extends CUserIdentity
 
         // 認証成功
         else{
-            $this->_id=$user->id;           // ユーザーID保存
+            $this->_id=$user->id;               // ユーザーID保存
+            $this->setState('id', $user->id);  // セッションにも保存
+
             $this->errorCode=self::ERROR_NONE;
         }
 

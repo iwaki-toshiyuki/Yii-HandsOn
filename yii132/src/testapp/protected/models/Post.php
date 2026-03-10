@@ -9,6 +9,14 @@ class Post extends CActiveRecord
         return 'post';
     }
 
+    // バリデーションルール
+    public function rules()
+    {
+        return array(
+            array('user_id, title, content', 'safe'),
+        );
+    }
+
     // ActiveRecordモデル取得
     public static function model($className=__CLASS__)
     {

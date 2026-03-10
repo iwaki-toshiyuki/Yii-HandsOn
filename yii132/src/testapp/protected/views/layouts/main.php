@@ -41,7 +41,7 @@
 
 				array(
 					'label'=>'Post',
-					'url'=>array('/post/create'),
+					'url'=>array('/post/index'),
 					'visible'=>!Yii::app()->user->isGuest
 				),
 
