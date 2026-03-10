@@ -1,4 +1,4 @@
-<h1>User作成</h1>
+<h1>ユーザー作成</h1>
 
 <!-- POST送信フォーム -->
 <form method="post">

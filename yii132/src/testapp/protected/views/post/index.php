@@ -1,7 +1,5 @@
 <h1>投稿一覧</h1>
 
-<a href="index.php?r=post/create">投稿作成</a>
-
 <!-- 検索フォーム -->
 <form method="get">
 
@@ -14,6 +12,10 @@
 <button type="submit">検索</button>
 
 </form>
+
+<br>
+
+<a href="index.php?r=post/create">投稿作成</a>
 
 <br>
 

@@ -1,9 +1,4 @@
-<h1>User一覧</h1>
-
-<!-- ユーザー作成ページへのリンク -->
-<a href="<?php echo Yii::app()->createUrl('user/create'); ?>">
-ユーザー新規作成
-</a>
+<h1>ユーザー一覧</h1>
 
 <!-- 検索フォーム -->
 <form method="get" action="index.php">
@@ -17,6 +12,11 @@
 <button type="submit">検索</button>
 
 </form>
+
+<!-- ユーザー作成ページへのリンク -->
+<a href="<?php echo Yii::app()->createUrl('user/create'); ?>">
+ユーザー新規作成
+</a>
 
 <table border="1">
 
